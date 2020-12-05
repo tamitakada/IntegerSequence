@@ -6,6 +6,7 @@ public class RangeTester {
 
   public static void main(String[] args) {
     testNext();
+    testLength();
   }
 
   public static void testNext() {
@@ -32,13 +33,8 @@ public class RangeTester {
       int numOne = rng.nextInt(500);
       int numTwo = rng.nextInt(500);
 
-      int flip = rng.nextInt(3);
-      if (flip == 0) numOne *= -1;
-      else if (flip == 1) numTwo *= -1;
-      else if (flip == 2) {
-        numOne *= -1;
-        numTwo *= -1;
-      }
+      numOne = flipRandomly(numOne);
+      numTwo = flipRandomly(numTwo);
 
       int bigger = numOne;
       int smaller = numTwo;
@@ -55,6 +51,57 @@ public class RangeTester {
     }
 
     printResults(results, "Test next");
+  }
+
+  public static void testLength() {
+    boolean[] results = new boolean[4];
+
+    Range one = new Range(-44, -10);
+    results[0] = (one.length() == 35);
+
+    one = new Range(90, 1000);
+    results[1] = (one.length() == 911);
+
+    one = new Range(-2, 4);
+    results[2] = (one.length() == 7);
+
+    results[3] = true;
+
+    for (int i = 0; i < 100; i++) {
+      Random rng = new Random();
+
+      int numOne = rng.nextInt(500);
+      int numTwo = rng.nextInt(500);
+
+      numOne = flipRandomly(numOne);
+      numTwo = flipRandomly(numTwo);
+
+      int bigger = numOne;
+      int smaller = numTwo;
+      if (numTwo > numOne) {
+        bigger = numTwo;
+        smaller = numOne;
+      }
+
+      Range test = new Range(smaller, bigger);
+      int count = 0;
+      for (int j = smaller; j <= bigger; j++) {
+        count++;
+      }
+      if (test.length() != count) {
+        results[3] = false;
+        break;
+      }
+    }
+
+    printResults(results, "Test length");
+  }
+
+  public static int flipRandomly(int a) {
+    Random rng = new Random();
+    int flip = rng.nextInt(1);
+    if (flip == 0) return a * -1;
+    return a;
   }
 
   public static boolean helperTestLoop(int s, int b, Range r) {
