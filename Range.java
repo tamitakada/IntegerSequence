@@ -14,7 +14,7 @@ public class Range implements IntegerSequence{
     current = start;
   }
   public int length(){
-    return numRange.length;
+    return end - start + 1;
   }
   public boolean hasNext(){
     return !(current == end);
@@ -22,7 +22,7 @@ public class Range implements IntegerSequence{
 
   //@throws NoSuchElementException
   public int next() throws NoSuchElementException {
-    if (current == end) throw NoSuchElementException;
+    if (current == end) throw new NoSuchElementException("You've reached the end.");
     else return current;
   }
 
