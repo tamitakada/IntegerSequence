@@ -24,6 +24,8 @@ public class RangeTester {
       results[2] = true;
     }
 
+    results[3] = true;
+
     for (int i = 0; i < 100; i++) {
       Random rng = new Random();
 
