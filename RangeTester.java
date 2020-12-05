@@ -8,6 +8,7 @@ public class RangeTester {
     testNext();
     testLength();
     testResetWithNext();
+    testHasNextWithNext();
   }
 
   public static void testNext() {
@@ -137,6 +138,20 @@ public class RangeTester {
     }
 
     printResults(results, "Test reset (with next)");
+  }
+
+  public static void testHasNextWithNext() {
+    boolean[] results = new boolean[4];
+
+    Range one = new Range(-2, 1);
+    results[0] = (one.hasNext());
+    results[1] = getNext(one) && getNext(one) && getNext(one) && getNext(one);
+    results[2] = (!one.hasNext());
+
+    one = new Range(15, 15);
+    results[3] = (one.hasNext());
+
+    printResults(results, "Test hasNext (with next)");
   }
 
   private static int flipRandomly(int a) {
